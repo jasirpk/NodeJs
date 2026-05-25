@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "cli-color": "^2.0.4",
+    "upper-case": "^3.0.0"
+  }
+}
