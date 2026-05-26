@@ -28,3 +28,17 @@ var uc = require('upper-case');
 
 console.log(uc.upperCase('hello world'));
 console.log(uc.upperCase('jasir'));
+
+// Gloabal objects
+
+// console.clear();
+console.log(__filename);
+console.log(__dirname);
+
+// setInterval(function(){
+//   console.log('Hello every 2 seconds');
+// }, 2000);
+
+setTimeout(function(){
+    console.log('Hello after 3 seconds');
+}, 3000);j
