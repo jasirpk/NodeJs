@@ -39,6 +39,22 @@ console.log(__dirname);
 //   console.log('Hello every 2 seconds');
 // }, 2000);
 
-setTimeout(function(){
-    console.log('Hello after 3 seconds');
-}, 3000);j
+// setTimeout(function(){
+//     console.log('Hello after 3 seconds');
+// }, 3000);
+
+
+/// OS module provides operating system-related utility methods and properties. It can be used to get information about the current operating system, such as its type, platform, architecture, memory usage, uptime, hostname, user info, network interfaces, CPU info, endianness, and home directory.
+var os = require('os');
+console.log('Operating System: ' + os.type());
+console.log('Platform: ' + os.platform());
+console.log('CPU Architecture: ' + os.arch());
+console.log('Total Memory: ' + os.totalmem());
+console.log('Free Memory: ' + os.freemem());
+console.log('Uptime: ' + os.uptime() + ' seconds');
+console.log('Hostname: ' + os.hostname());
+console.log('User Info: ', os.userInfo());
+console.log('Network Interfaces: ', os.networkInterfaces());
+console.log('CPU Info: ', os.cpus());
+console.log('Endianness: ' + os.endianness());
+console.log('Home Directory: ' + os.homedir());
