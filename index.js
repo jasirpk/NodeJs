@@ -45,16 +45,64 @@ console.log(__dirname);
 
 
 /// OS module provides operating system-related utility methods and properties. It can be used to get information about the current operating system, such as its type, platform, architecture, memory usage, uptime, hostname, user info, network interfaces, CPU info, endianness, and home directory.
-var os = require('os');
-console.log('Operating System: ' + os.type());
-console.log('Platform: ' + os.platform());
-console.log('CPU Architecture: ' + os.arch());
-console.log('Total Memory: ' + os.totalmem());
-console.log('Free Memory: ' + os.freemem());
-console.log('Uptime: ' + os.uptime() + ' seconds');
-console.log('Hostname: ' + os.hostname());
-console.log('User Info: ', os.userInfo());
-console.log('Network Interfaces: ', os.networkInterfaces());
-console.log('CPU Info: ', os.cpus());
-console.log('Endianness: ' + os.endianness());
-console.log('Home Directory: ' + os.homedir());
+// var os = require('os');
+// console.log('Operating System: ' + os.type());
+// console.log('Platform: ' + os.platform());
+// console.log('CPU Architecture: ' + os.arch());
+// console.log('Total Memory: ' + os.totalmem());
+// console.log('Free Memory: ' + os.freemem());
+// console.log('Uptime: ' + os.uptime() + ' seconds');
+// console.log('Hostname: ' + os.hostname());
+// console.log('User Info: ', os.userInfo());
+// console.log('Network Interfaces: ', os.networkInterfaces());
+// console.log('CPU Info: ', os.cpus());
+// console.log('Endianness: ' + os.endianness());
+// console.log('Home Directory: ' + os.homedir());
+
+
+var fs = require('fs');
+
+// Read files
+
+fs.readFile('example.txt', 'utf8',function(err, data){
+    if(err){
+        console.error('Error reading file:', err);  
+    }
+    console.log('File content:',data);
+})
+
+// Create a file
+
+fs.writeFile('newfile.txt', 'This is a new file created using Node.js', function(err){
+    if(err){
+        console.error('Error writing file:', err);
+    }
+    console.log('File created successfully');
+}) 
+
+// uppending data to a file
+
+fs.appendFile('newfile.txt', '\nThis is additional content appended to the file.', function(err){
+    if(err){
+        console.error('Error appending to file:', err);
+    }
+    console.log('content appended successfully');
+})
+
+// Rename a file
+
+fs.rename('newfile.txt', 'renamedfile.txt', function(err){
+    if(err){
+        console.error('Error renaming file:', err);
+    }
+    console.log('File renamed successfully');
+})
+
+// Delete a file
+
+fs.unlink('renamedfile.txt', function(err){
+    if(err){
+        console.error('Error deleting file:', err);
+    }
+    console.log('File deleted successfully');
+})
