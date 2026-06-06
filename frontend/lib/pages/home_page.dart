@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               ElevatedButton.icon(
                 onPressed: () {
-                 Navigator.pushNamed(context, '/create');
+                  Navigator.pushNamed(context, '/create');
                 },
                 style: buttonStyle(),
                 label: const Text("Create"),
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               ),
               ElevatedButton.icon(
                 onPressed: () {
-                  // Handle button press
+                  Navigator.pushNamed(context, '/display');
                 },
                 style: buttonStyle(),
 

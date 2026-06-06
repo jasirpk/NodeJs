@@ -1,11 +1,22 @@
 class PersonModel {
-  final String? name;
-  final String? phone;
-  final String? age;
+  int? id;
+  String? pname;
+  String? pphone;
+  String? page;
 
   PersonModel({
-     this.name,
-     this.phone,
-     this.age,
+    this.id,
+    this.pname,
+    this.pphone,
+    this.page,
   });
+
+  factory PersonModel.fromJson(Map<String, dynamic> json) {
+    return PersonModel(
+      id: json['id'],
+      pname: json['pname'],
+      pphone: json['pphone'],
+      page: json['page'],
+    );
+  }
 }

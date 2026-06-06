@@ -1,10 +1,15 @@
 
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
-// Allows the server to accept JSON data from requests.
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
 
 // Allows the server to read form data submitted from HTML forms.
@@ -40,3 +45,21 @@ app.post('/api/add_person', (req, res) => {
         Person: pdata
     });
 });
+
+
+// GET Api
+
+app.get('/api/get_persons', (req, res)=>{
+    
+    if(personData.length > 0){
+        res.status(200).send({
+            'status_code': 200,
+            'person':personData,
+        })
+    }else{
+        res.status(404).send({
+            'status_code': 404,
+            'person':[],
+        })
+    }
+})
