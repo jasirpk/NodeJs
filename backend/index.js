@@ -6,9 +6,9 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type']
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type']
 }));
 app.use(express.json());
 
@@ -19,7 +19,7 @@ app.use(express.urlencoded({
 
 const personData = [];
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 })
 
@@ -49,17 +49,43 @@ app.post('/api/add_person', (req, res) => {
 
 // GET Api
 
-app.get('/api/get_persons', (req, res)=>{
-    
-    if(personData.length > 0){
+app.get('/api/get_persons', (req, res) => {
+
+    if (personData.length > 0) {
         res.status(200).send({
             'status_code': 200,
-            'person':personData,
+            'person': personData,
         })
-    }else{
+    } else {
         res.status(404).send({
             'status_code': 404,
-            'person':[],
+            'person': [],
         })
     }
-})
+});
+
+// PUT API
+
+app.put('/api/update_person/:id', (req, res) => {
+
+    let id = Number(req.params.id);
+
+    let personTOBEUpdated = personData.find(
+        p => p.id === id
+    );
+
+    let index = personData.indexOf(personTOBEUpdated);
+
+    personData[index] = {
+        ...personTOBEUpdated,
+        pname: req.body.name,
+        pphone: req.body.phone,
+        page: req.body.age
+    };
+
+    res.status(200).send({
+        status_code: 200,
+        message: "Person updated successfully",
+        person: personData[index]
+    });
+});

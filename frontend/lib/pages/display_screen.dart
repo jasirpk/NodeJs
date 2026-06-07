@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/update_screen.dart';
 import 'package:frontend/services/api.dart';
 
 class DisplayScreen extends StatefulWidget {
@@ -32,9 +33,30 @@ class _DisplayScreenState extends State<DisplayScreen> {
             return ListView.builder(
               itemCount: Api.personData.length, // Replace with your actual data count
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(Api.personData[index].pname ?? 'No Name'), // Replace with your actual data
-                  subtitle: Text('Phone: ${Api.personData[index].pphone ?? 'No Phone'}'), // Replace with your actual data
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.teal[50], borderRadius: BorderRadius.circular(8)),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 26, vertical: 8),
+                      leading: CircleAvatar(child: Icon(Icons.person)),
+                      title: Text(Api.personData[index].pname ?? 'No Name'),
+                      subtitle: Text('Phone: ${Api.personData[index].pphone ?? 'No Phone'} Age: ${Api.personData[index].page ?? 'No Age'}'),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.teal),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => UpdateScreen(personId: Api.personData[index].id?.toString() ?? '')),
+                          ).then((_) {
+                            setState(() {
+                              fetchPersons = Api.getPersons(); // Refresh data after returning from update screen
+                            });
+                          });
+                        },
+                      ),
+                    ),
+                  ),
                 );
               },
             );

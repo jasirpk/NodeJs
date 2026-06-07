@@ -45,4 +45,27 @@ class Api {
       log('Error: $e');
     }
   }
+
+  // PUT Api
+
+  static Future<void> updatePerson(String id, Map pdata) async {
+    try {
+      final res = await http.put(Uri.parse("${baseUrl}update_person/$id"), body: pdata);
+
+      if (res.statusCode == 200) {
+        var data = jsonDecode(res.body);
+        log("Final Result: $data");
+        List persons = data['person'];
+
+        personData.clear();
+        for (var person in persons) {
+          personData.add(PersonModel.fromJson(person));
+        }
+      } else {
+        log("Error: ${res.statusCode}");
+      }
+    } catch (e) {
+      log("Error: $e");
+    }
+  }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:frontend/services/api.dart';
 
@@ -42,10 +44,19 @@ class _CreateScreenState extends State<CreateScreen> {
               decoration: const InputDecoration(labelText: "Enter Your Age"),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 var data = {'name': nameController.text, 'phone': phoneController.text, 'age': ageController.text};
 
-                Api.addPerson(data);
+                try {
+                  await Api.addPerson(data);
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Person added successfully")));
+                  nameController.clear();
+                  phoneController.clear();
+                  ageController.clear();
+                  Navigator.pop(context);
+                } catch (_) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Failed to add person")));
+                }
               },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
