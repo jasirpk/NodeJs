@@ -57,8 +57,8 @@ app.get('/api/get_persons', (req, res) => {
             'person': personData,
         })
     } else {
-        res.status(404).send({
-            'status_code': 404,
+        res.status(200).send({
+            'status_code': 200,
             'person': [],
         })
     }
@@ -89,3 +89,23 @@ app.put('/api/update_person/:id', (req, res) => {
         person: personData[index]
     });
 });
+
+// DELETE API
+
+app.delete('/api/delete_person/:id', (req, res)=>{
+
+    let id = Number(req.params.id);
+
+    let personTOBEDeleted = personData.find(
+        p => p.id === id
+    )
+
+    let index = personData.indexOf(personTOBEDeleted);
+
+    personData.splice(index, 1);
+
+    res.status(200).send({
+        status_code: 200,
+        message: 'Person deleted successfully',
+    })
+})

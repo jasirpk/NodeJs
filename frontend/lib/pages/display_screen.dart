@@ -41,19 +41,38 @@ class _DisplayScreenState extends State<DisplayScreen> {
                       contentPadding: const EdgeInsets.symmetric(horizontal: 26, vertical: 8),
                       leading: CircleAvatar(child: Icon(Icons.person)),
                       title: Text(Api.personData[index].pname ?? 'No Name'),
-                      subtitle: Text('Phone: ${Api.personData[index].pphone ?? 'No Phone'} Age: ${Api.personData[index].page ?? 'No Age'}'),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.edit, color: Colors.teal),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => UpdateScreen(personId: Api.personData[index].id?.toString() ?? '')),
-                          ).then((_) {
-                            setState(() {
-                              fetchPersons = Api.getPersons(); // Refresh data after returning from update screen
-                            });
-                          });
-                        },
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [Text('Phone: ${Api.personData[index].pphone}'), Text('Age: ${Api.personData[index].page}')],
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit, color: Colors.teal),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => UpdateScreen(personId: Api.personData[index].id?.toString() ?? '')),
+                              ).then((_) {
+                                setState(() {
+                                  fetchPersons = Api.getPersons(); // Refresh data after returning from update screen
+                                });
+                              });
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.teal),
+                            onPressed: () {
+                              Api.deletePerson(Api.personData[index].id.toString()).then((_) {
+                                setState(() {
+                                  fetchPersons = Api.getPersons(); 
+                                });
+                              });
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),

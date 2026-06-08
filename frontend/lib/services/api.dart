@@ -68,4 +68,27 @@ class Api {
       log("Error: $e");
     }
   }
+
+  // DELETE Api
+
+  static Future<void> deletePerson(String id)async {
+    try {
+      final res = await http.delete(Uri.parse("${baseUrl}delete_person/$id"));
+
+      if (res.statusCode == 200) {
+        var data = jsonDecode(res.body);
+        log("Final Result: $data");
+        List persons = data['person'];
+
+        personData.clear();
+        for (var person in persons) {
+          personData.add(PersonModel.fromJson(person));
+        }
+      } else {
+        log("Error: ${res.statusCode}");
+      }
+    } catch (e) {
+      log("Error: $e");
+    }
+  }
 }
