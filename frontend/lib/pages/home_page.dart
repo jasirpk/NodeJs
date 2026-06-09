@@ -11,53 +11,87 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          height: MediaQuery.sizeOf(context).height * 0.7,
-          width: MediaQuery.sizeOf(context).width * 0.6,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 5))],
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xff0F766E), Color(0xff14B8A6)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 25,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/create');
-                },
-                style: buttonStyle(),
-                label: const Text("Create"),
-                icon: const Icon(Icons.create),
-              ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/display');
-                },
-                style: buttonStyle(),
+        ),
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.all(30),
+            width: 380,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(25),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 20,
+                  offset: Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.teal,
+                  child: Icon(
+                    Icons.people_alt_rounded,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                ),
 
-                label: const Text("Read"),
-                icon: const Icon(Icons.visibility),
-              ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Handle button press
-                },
-                label: const Text("Update"),
-                icon: const Icon(Icons.edit),
-                style: buttonStyle(),
-              ),
-              ElevatedButton.icon(
-                onPressed: () {
-                  // Handle button press
-                },
-                label: const Text("Delete"),
-                icon: const Icon(Icons.delete),
-                style: buttonStyle(),
-              ),
-            ],
+                const SizedBox(height: 20),
+
+                const Text(
+                  "CRUD Application",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.teal,
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                const Text(
+                  "Manage your person records easily",
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,
+                  ),
+                ),
+
+                const SizedBox(height: 40),
+
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/create');
+                  },
+                  icon: const Icon(Icons.person_add_alt_1),
+                  label: const Text("Create Person"),
+                  style: buttonStyle(),
+                ),
+
+                const SizedBox(height: 20),
+
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/display');
+                  },
+                  icon: const Icon(Icons.list_alt),
+                  label: const Text("View Persons"),
+                  style: buttonStyle(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -68,10 +102,15 @@ class _HomePageState extends State<HomePage> {
     return ElevatedButton.styleFrom(
       backgroundColor: Colors.teal,
       foregroundColor: Colors.white,
-      minimumSize: const Size(180, 50),
+      minimumSize: const Size(double.infinity, 55),
       elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      textStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }
