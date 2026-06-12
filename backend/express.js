@@ -4,27 +4,17 @@ const path = require('path');
 const app = express();
 const port = 4000;
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// app.get('/', (req, res)=>{
-//     // res.send("This is the home page");
-//     res.sendFile(path.join(__dirname , 'index.html'));
-// })
+app.get('/', (req, res)=>{
+    // res.download(path.join(__dirname, 'sample.txt'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 
-// app.get('/product', (req, res)=>{
-//     // res.send("This is the product page");
-//     res.sendFile(path.join(__dirname , 'product.html'));
-// })
+})
 
-// app.get('/about', (req, res)=>{
-//     // res.send("This is the about page");
-//     res.sendFile(path.join(__dirname , 'about.html'));
-// })
-
-// app.get('/contact', (req, res)=>{
-//     // res.send("This is the contact page");
-//     res.sendFile(path.join(__dirname , 'contact.html'));
-// })
+app.get('/download', (req, res)=>{
+    res.download(path.join(__dirname, 'public/images/my_flutter_avatar.png'))
+})
 
 app.listen(port, ()=>{
     console.log(`Server is running on http://localhost:${port}`);
