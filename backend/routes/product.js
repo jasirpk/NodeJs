@@ -2,19 +2,19 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (req, res)=>{
+router.get('/', (req, res) => {
     res.send("All products");
 })
-router.get('/details', (req, res)=>{
+router.get('/details', (req, res) => {
     res.send("All Details");
 })
-router.post('/', (req, res)=>{
+router.post('/', (req, res) => {
     res.send("All products");
 })
-router.put('/', (req, res)=>{
+router.put('/', (req, res) => {
     res.send("All products");
 })
-router.delete('/', (req, res)=>{
+router.delete('/', (req, res) => {
     res.send("All products");
 })
 

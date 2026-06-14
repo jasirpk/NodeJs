@@ -11,7 +11,7 @@ app.use('/user', userRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     // res.download(path.join(__dirname, 'sample.txt'));
     res.sendFile(path.join(__dirname, 'index.html'));
 
@@ -21,7 +21,7 @@ app.get('/', (req, res)=>{
 //     res.download(path.join(__dirname, 'public/images/my_flutter_avatar.png'))
 // })
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 })
 
